@@ -1,0 +1,21 @@
+{
+  "short_name": "VidyaKosh",
+  "name": "VidyaKosh - डिजिटल विद्या तिजोरी",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/index.html",
+  "background_color": "#0d0e15",
+  "theme_color": "#0d0e15",
+  "display": "standalone",
+  "orientation": "portrait"
+}

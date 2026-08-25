@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f172a" />
+  <title>School Visits | VidyaKosh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-900: #0f172a;
+      --bg-800: #111c2f;
+      --glass: rgba(30, 41, 59, 0.6);
+      --glass-border: rgba(148, 163, 184, 0.18);
+      --cyan: #06b6d4;
+      --cyan-soft: rgba(6, 182, 212, 0.14);
+      --blue: #3b82f6;
+      --text: #f8fafc;
+      --text-dim: #cbd5e1;
+      --text-muted: #94a3b8;
+      --radius: 18px;
+      --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, 'Noto Sans Devanagari', sans-serif;
+      background:
+        radial-gradient(700px 420px at 10% -10%, rgba(6,182,212,0.16), transparent 60%),
+        radial-gradient(700px 420px at 100% 0%, rgba(59,130,246,0.16), transparent 45%),
+        var(--bg-900);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.55;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* Navbar Styling */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 20px;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    .brand .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: #04222a;
+      box-shadow: 0 0 20px rgba(6,182,212,0.35);
+    }
+
+    .brand .logo svg { width: 22px; height: 22px; }
+    .brand span { color: var(--cyan); }
+
+    .back-btn {
+      padding: 11px 16px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(6,182,212,0.18), rgba(59,130,246,0.18));
+      border: 1px solid rgba(6,182,212,0.3);
+      color: #e6fbff;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .back-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(6,182,212,0.2);
+    }
+
+    /* Hero Section */
+    .hero {
+      margin-top: 24px;
+      padding: 34px 28px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(30,41,59,0.8), rgba(15,23,42,0.95));
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 4vw, 40px);
+      margin-bottom: 10px;
+      color: #f8fafc;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: 16px;
+    }
+
+    /* Gallery Grid & Animated Cards */
+    .gallery-grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+    }
+
+    .gallery-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 14px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), 
+                  box-shadow 0.35s ease, 
+                  border-color 0.35s ease;
+      cursor: pointer;
+    }
+
+    .gallery-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(6, 182, 212, 0.18);
+      border-color: rgba(6, 182, 212, 0.4);
+    }
+
+    .thumb {
+      position: relative;
+      height: 220px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(6,182,212,0.15), rgba(59,130,246,0.15));
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* Initial state for Zoom-Out Effect */
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.18);
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Hover State: Zoom Out */
+    .gallery-card:hover .thumb img {
+      transform: scale(1);
+    }
+
+    /* Blue Glass Overlay Effect */
+    .thumb::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.35), rgba(59, 130, 246, 0.35));
+      opacity: 0;
+      transition: opacity 0.35s ease-in-out;
+      pointer-events: none;
+    }
+
+    .gallery-card:hover .thumb::after {
+      opacity: 1;
+    }
+
+    /* Card Details */
+    .card-content { 
+      padding: 14px 4px 4px; 
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .card-meta {
+      font-size: 12px;
+      color: var(--cyan);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .card-text {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 640px) {
+      .container { padding: 16px; }
+      .navbar { flex-direction: column; align-items: flex-start; }
+      .hero { padding: 24px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="navbar">
+      <a class="brand" href="index.html">
+        <span class="logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#04222a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+            <path d="M6 12v5c3 3 9 3 12 0v-5" />
+          </svg>
+        </span>
+        Vidya<span>Kosh</span>
+      </a>
+      <a class="back-btn" href="index.html">Back to Home</a>
+    </nav>
+
+    <section class="hero">
+      <h1>School Visits &amp; Student Interaction</h1>
+      <p>Memories, AI guidance sessions, and school intro programs created to inspire students and help them discover learning in a simple, modern way.</p>
+    </section>
+
+    <section class="gallery-grid">
+      <article class="gallery-card">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&auto=format&fit=crop&q=80" alt="School visit photo" />
+        </div>
+        <div class="card-content">
+          <div class="card-title">Govt. Senior Secondary School</div>
+          <div class="card-meta">March 2026 • Student Session</div>
+          <div class="card-text">A warm interaction with students where the team shared study tips and introduced the VidyaKosh learning experience.</div>
+        </div>
+      </article>
+
+      <article class="gallery-card">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&auto=format&fit=crop&q=80" alt="AI Guidance Session" />
+        </div>
+        <div class="card-content">
+          <div class="card-title">AI Guidance Session</div>
+          <div class="card-meta">February 2026 • Career Talk</div>
+          <div class="card-text">Students enjoyed a practical demo of AI-powered learning and career guidance through simple interactive examples.</div>
+        </div>
+      </article>
+
+      <article class="gallery-card">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=800&auto=format&fit=crop&q=80" alt="Vidya AI Demonstration" />
+        </div>
+        <div class="card-content">
+          <div class="card-title">Vidya AI Demonstration</div>
+          <div class="card-meta">January 2026 • Live Demo</div>
+          <div class="card-text">A live classroom session showing how digital study tools can make revision easier and more engaging for learners.</div>
+        </div>
+      </article>
+
+      <article class="gallery-card">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&auto=format&fit=crop&q=80" alt="Science Lab Interaction" />
+        </div>
+        <div class="card-content">
+          <div class="card-title">Science Lab Interaction</div>
+          <div class="card-meta">December 2025 • Lab Visit</div>
+          <div class="card-text">Students explored hands-on methods and asked thoughtful questions about practical learning and science concepts.</div>
+        </div>
+      </article>
+
+      <article class="gallery-card">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&auto=format&fit=crop&q=80" alt="Student Motivation Meet" />
+        </div>
+        <div class="card-content">
+          <div class="card-title">Student Motivation Meet</div>
+          <div class="card-meta">November 2025 • Motivation</div>
+          <div class="card-text">An inspirational event centered on confidence, consistency, and the power of regular study habits.</div>
+        </div>
+      </article>
+
+      <article class="gallery-card">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=800&auto=format&fit=crop&q=80" alt="Board Exam Prep Talk" />
+        </div>
+        <div class="card-content">
+          <div class="card-title">Board Exam Prep Talk</div>
+          <div class="card-meta">October 2025 • Exam Guidance</div>
+          <div class="card-text">A focused discussion on exam strategy, revision planning, and staying calm during board preparation.</div>
+        </div>
+      </article>
+
+      <article class="gallery-card">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop&q=80" alt="School Introduction Program" />
+        </div>
+        <div class="card-content">
+          <div class="card-title">School Introduction Program</div>
+          <div class="card-meta">September 2025 • Intro Program</div>
+          <div class="card-text">A friendly welcome session introducing the mission of VidyaKosh to younger learners and teachers.</div>
+        </div>
+      </article>
+
+      <article class="gallery-card">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=800&auto=format&fit=crop&q=80" alt="Peer Learning Circle" />
+        </div>
+        <div class="card-content">
+          <div class="card-title">Peer Learning Circle</div>
+          <div class="card-meta">August 2025 • Group Activity</div>
+          <div class="card-text">Students worked in groups, shared ideas, and practiced confidence-building through collaborative learning.</div>
+        </div>
+      </article>
+
+      <article class="gallery-card">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?w=800&auto=format&fit=crop&q=80" alt="Digital Learning Meetup" />
+        </div>
+        <div class="card-content">
+          <div class="card-title">Digital Learning Meetup</div>
+          <div class="card-meta">July 2025 • Tech Session</div>
+          <div class="card-text">A modern classroom meetup featuring practical digital study tools and interactive educational resources.</div>
+        </div>
+      </article>
+
+      <article class="gallery-card">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&auto=format&fit=crop&q=80" alt="Teacher Interaction Day" />
+        </div>
+        <div class="card-content">
+          <div class="card-title">Teacher Interaction Day</div>
+          <div class="card-meta">June 2025 • Faculty Meet</div>
+          <div class="card-text">A productive exchange with teachers about student support, guidance methods, and future program ideas.</div>
+        </div>
+      </article>
+
+      <article class="gallery-card">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=800&auto=format&fit=crop&q=80" alt="Campus Orientation" />
+        </div>
+        <div class="card-content">
+          <div class="card-title">Campus Orientation</div>
+          <div class="card-meta">May 2025 • Orientation</div>
+          <div class="card-text">A campus orientation session sharing learning pathways and helping students understand available resources.</div>
+        </div>
+      </article>
+
+      <article class="gallery-card">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?w=800&auto=format&fit=crop&q=80" alt="Future Leaders Talk" />
+        </div>
+        <div class="card-content">
+          <div class="card-title">Future Leaders Talk</div>
+          <div class="card-meta">April 2025 • Leadership</div>
+          <div class="card-text">A special interaction focusing on leadership, discipline, and long-term goals for young learners.</div>
+        </div>
+      </article>
+
+      <article class="gallery-card">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=800&auto=format&fit=crop&q=80" alt="Community Learning Day" />
+        </div>
+        <div class="card-content">
+          <div class="card-title">Community Learning Day</div>
+          <div class="card-meta">March 2025 • Community Visit</div>
+          <div class="card-text">A community-based learning event that brought students together for shared ideas and meaningful conversations.</div>
+        </div>
+      </article>
+
+      <article class="gallery-card">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&auto=format&fit=crop&q=80" alt="Study Circle Session" />
+        </div>
+        <div class="card-content">
+          <div class="card-title">Study Circle Session</div>
+          <div class="card-meta">February 2025 • Group Study</div>
+          <div class="card-text">A collaborative learning session where students explored topics together and built stronger study habits.</div>
+        </div>
+      </article>
+
+      <article class="gallery-card">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&auto=format&fit=crop&q=80" alt="Learning Motivation Event" />
+        </div>
+        <div class="card-content">
+          <div class="card-title">Learning Motivation Event</div>
+          <div class="card-meta">January 2025 • Inspiration</div>
+          <div class="card-text">A memorable event encouraging students to stay curious, positive, and focused on their learning journey.</div>
+        </div>
+     </article>
+
+         <article class="gallery-card">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&auto=format&fit=crop&q=80" alt="Learning Motivation Event" />
+        </div>
+        <div class="card-content">
+          <div class="card-title">Learning Motivation Event</div>
+          <div class="card-meta">January 2025 • Inspiration</div>
+          <div class="card-text">A memorable event encouraging students to stay curious, positive, and focused on their learning journey.</div>
+        </div>
+     </article>
+     </section>
+  </div>
+</body>
+</html>

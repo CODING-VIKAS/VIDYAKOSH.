@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VidyaKosh - Chapters</title>
+    <!-- Premium Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-primary: #0d0e15;
+            --bg-secondary: #161824;
+            --bg-tertiary: #1f2330;
+            --accent-green: #10b981;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-red: #ef4444;
+            --text-main: #ffffff;
+            --text-muted: #9ca3af;
+            --border-color: #26293b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            background: linear-gradient(180deg, #0d0e15 0%, #121420 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: rgba(22, 24, 36, 0.96);
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+
+        #subjectTitle {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        main {
+            padding: 1.1rem 1rem 2rem;
+            flex: 1;
+            max-width: 760px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .subject-shell {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .subject-banner {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: linear-gradient(135deg, rgba(22, 24, 36, 0.98), rgba(31, 35, 48, 0.95));
+            border: 1px solid var(--border-color);
+            border-radius: 22px;
+            padding: 1rem 1.1rem;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+            animation: bluePulse 2.8s ease-in-out infinite;
+        }
+
+        .subject-icon-large {
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            display: grid;
+            place-items: center;
+            font-size: 1.45rem;
+            background: rgba(59, 130, 246, 0.16);
+            border: 1px solid rgba(59, 130, 246, 0.35);
+            flex-shrink: 0;
+        }
+
+        .subject-banner-media {
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            flex-shrink: 0;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+        }
+
+        .subject-banner-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .banner-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 0.28rem;
+        }
+
+        .banner-copy .eyebrow {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+        }
+
+        .banner-copy h1 {
+            font-size: 1.28rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .banner-copy .banner-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        .chapter-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .chapter-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.8rem;
+            background: linear-gradient(135deg, rgba(22, 24, 36, 0.97), rgba(31, 35, 48, 0.98));
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 0.95rem 1rem;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+            animation: bluePulse 2.8s ease-in-out infinite;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            cursor: pointer;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-2px) scale(1.01);
+            border-color: rgba(59, 130, 246, 0.55);
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25), 0 0 22px rgba(59, 130, 246, 0.24);
+            animation: hoverGlow 0.8s ease-in-out forwards;
+        }
+
+        .chapter-main {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .chapter-card:nth-child(2n) {
+            animation-delay: 0.2s;
+        }
+
+        .chapter-badge {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            background: rgba(16, 185, 129, 0.16);
+            color: var(--accent-green);
+            font-size: 0.95rem;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .chapter-name {
+            font-size: 0.96rem;
+            font-weight: 600;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        .live-class-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.5rem 0.7rem;
+            border: 1px solid rgba(239, 68, 68, 0.35);
+            border-radius: 999px;
+            background: rgba(239, 68, 68, 0.12);
+            color: #fecaca;
+            font-size: 0.78rem;
+            font-weight: 700;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .live-class-btn:hover {
+            transform: translateY(-1px);
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        .chapter-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-shrink: 0;
+        }
+
+        .chapter-resources {
+            display: flex;
+            gap: 0.45rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .chapter-resources .res-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.35rem 0.6rem;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .chapter-resources .res-btn:hover {
+            background: rgba(56, 189, 248, 0.25);
+            border-color: #38bdf8;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ef4444;
+            box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            animation: pulse 1.2s infinite;
+        }
+
+        .loading-state,
+        .empty-state {
+            padding: 1.25rem;
+            border-radius: 18px;
+            border: 1px solid var(--border-color);
+            background: linear-gradient(135deg, rgba(22, 24, 36, 0.97), rgba(31, 35, 48, 0.98));
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        @keyframes bluePulse {
+            0%, 100% {
+                box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16), 0 0 0 rgba(59, 130, 246, 0.0);
+                border-color: var(--border-color);
+            }
+            50% {
+                box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2), 0 0 18px rgba(59, 130, 246, 0.22);
+                border-color: rgba(59, 130, 246, 0.55);
+            }
+        }
+
+        @keyframes hoverGlow {
+            0% {
+                box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25), 0 0 0 rgba(59, 130, 246, 0);
+            }
+            100% {
+                box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25), 0 0 20px rgba(59, 130, 246, 0.28);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <button class="back-btn" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
+        <div id="subjectTitle">Loading Subject...</div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="subjectContainer"></main>
+
+    <script>
+        const CUSTOM_CHAPTER_YOUTUBE_LINKS = {
+            science: {
+                'Chemical Reactions and Equations': 'https://www.youtube.com/watch?v=YOUR_VIDEO_ID'
+            }
+        };
+
+        function buildChapterYoutubeUrl(subjectId, title, explicitUrl) {
+            if (explicitUrl) return explicitUrl;
+
+            const safeTitle = (title || '').toString().trim();
+            const safeSubject = (subjectId || '').toString().trim().toLowerCase();
+            const subjectLinks = CUSTOM_CHAPTER_YOUTUBE_LINKS[safeSubject] || {};
+            const directMatch = subjectLinks[safeTitle] || subjectLinks[safeTitle.toLowerCase()];
+            if (directMatch) return directMatch;
+
+            const query = `${safeSubject} ${safeTitle}`.replace(/\s+/g, '+');
+            return `https://www.youtube.com/results?search_query=${query}+live+class`;
+        }
+
+        const DEFAULT_SUBJECT_CONTENT = {
+            science: {
+                id: 'science',
+                slug: 'science',
+                title: '🧪 Science Syllabus',
+                titleHi: 'विज्ञान पाठ्यक्रम',
+                chapters: [
+                    'Chemical Reactions and Equations',
+                    'Acids, Bases and Salts',
+                    'Metals and Non-metals',
+                    'Carbon and its Compounds',
+                    'Life Processes',
+                    'Control and Coordination',
+                    'How do Organisms Reproduce?',
+                    'Heredity and Evolution',
+                    'Light – Reflection and Refraction',
+                    'Human Eye and Colourful World',
+                    'Electricity',
+                    'Magnetic Effects of Electric Current',
+                    'Our Environment'
+                ]
+            },
+            math: {
+                id: 'math',
+                slug: 'math',
+                title: '📐 Mathematics Syllabus',
+                titleHi: 'गणित पाठ्यक्रम',
+                chapters: [
+                    'Real Numbers',
+                    'Polynomials',
+                    'Pair of Linear Equations in Two Variables',
+                    'Quadratic Equations',
+                    'Arithmetic Progressions',
+                    'Triangles',
+                    'Coordinate Geometry',
+                    'Introduction to Trigonometry',
+                    'Some Applications of Trigonometry',
+                    'Circles',
+                    'Areas Related to Circles',
+                    'Surface Areas and Volumes',
+                    'Statistics',
+                    'Probability'
+                ]
+            },
+            social: {
+                id: 'social',
+                slug: 'social',
+                title: '🌍 Social Science Syllabus',
+                titleHi: 'सामाजिक विज्ञान पाठ्यक्रम',
+                chapters: [
+                    'The Rise of Nationalism in Europe',
+                    'Nationalism in India',
+                    'The Making of a Global World',
+                    'The Age of Industrialisation',
+                    'Print Culture and the Modern World',
+                    'Resources and Development',
+                    'Forest and Wildlife Resources',
+                    'Water Resources',
+                    'Agriculture',
+                    'Minerals and Energy Resources',
+                    'Manufacturing Industries',
+                    'Lifelines of National Economy',
+                    'Power Sharing',
+                    'Federalism',
+                    'Gender, Religion and Caste',
+                    'Political Parties',
+                    'Outcomes of Democracy',
+                    'Development',
+                    'Indian Economy',
+                    'Consumer Rights'
+                ]
+            },
+            english: {
+                id: 'english',
+                slug: 'english',
+                title: '✍️ English Syllabus',
+                titleHi: 'अंग्रेज़ी पाठ्यक्रम',
+                chapters: [
+                    'A Letter to God',
+                    'Nelson Mandela: Long Walk to Freedom',
+                    'Two Stories about Flying',
+                    'From the Diary of Anne Frank',
+                    'Glimpses of India',
+                    'Mijbil the Otter',
+                    'Madam Rides the Bus',
+                    'The Sermon at Benares',
+                    'The Proposal',
+                    'A Triumph of Surgery',
+                    'The Thief’s Story',
+                    'The Midnight Visitor',
+                    'A Question of Trust',
+                    'The Book That Saved the Earth'
+                ]
+            },
+            english_grammar: {
+                id: 'english_grammar',
+                slug: 'english_grammar',
+                title: '📖 English Grammar Syllabus',
+                titleHi: 'English Grammar पाठ्यक्रम',
+                chapters: [
+                    'Tenses',
+                    'Direct and Indirect Speech',
+                    'Active and Passive Voice',
+                    'Sentence Connectors',
+                    'Formal and Informal Writing'
+                ]
+            },
+            hindi: {
+                id: 'hindi',
+                slug: 'hindi',
+                title: '📝 Hindi Syllabus',
+                titleHi: 'हिंदी पाठ्यक्रम',
+                chapters: [
+                    'सूरदास के पद',
+                    'राम-लक्ष्मण-परशुराम संवाद',
+                    'आत्मकथ्य',
+                    'उत्साह और अट नहीं रही है',
+                    'यह दंतुरित मुस्कान और फसल',
+                    'संगतकार',
+                    'नेताजी का चश्मा',
+                    'बालगोबिन भगत',
+                    'लखनवी अंदाज़',
+                    'एक कहानी यह भी',
+                    'नौबतखाने में इबादत',
+                    'संस्कृति',
+                    'माता का अँचल',
+                    'मैं क्यों लिखता हूँ?',
+                    'व्याकरण और लेखन'
+                ]
+            },
+            sanskrit: {
+                id: 'sanskrit',
+                slug: 'sanskrit',
+                title: '📜 Sanskrit Syllabus',
+                titleHi: 'संस्कृत पाठ्यक्रम',
+                chapters: [
+                    'शुचिपर्यावरणम्',
+                    'बुद्धिर्बलवती सदा',
+                    'शिशुलालनम्',
+                    'जननी तुल्यवत्सला',
+                    'सुभाषितानि',
+                    'सौहार्दं प्रकृतेः शोभा',
+                    'विचित्रः साक्षी',
+                    'सूक्तयः',
+                    'भूकम्पविभीषिका',
+                    'अन्योक्तयः',
+                    'संधि',
+                    'समास',
+                    'प्रत्यय',
+                    'वाच्य परिवर्तन'
+                ]
+            }
+        };
+
+        Object.values(DEFAULT_SUBJECT_CONTENT).forEach((subject) => {
+            subject.chapters = (subject.chapters || []).map((chapterTitle) => ({
+                title: chapterTitle,
+                youtubeUrl: buildChapterYoutubeUrl(subject.id, chapterTitle)
+            }));
+        });
+
+        function getSubjectKey() {
+            const params = new URLSearchParams(window.location.search);
+            const directKey = (params.get('sub') || params.get('subject') || '').trim().toLowerCase();
+            if (directKey) return directKey;
+
+            const hashKey = (window.location.hash || '').replace(/^#/, '').trim().toLowerCase();
+            if (hashKey) return hashKey;
+
+            try {
+                const savedKey = localStorage.getItem('vidyakosh_last_subject');
+                if (savedKey) return savedKey.trim().toLowerCase();
+            } catch (error) {
+                console.warn('Unable to read saved subject.', error);
+            }
+
+            return '';
+        }
+
+        function normalizeStoredSubjectData(subjects) {
+            if (!Array.isArray(subjects)) return {};
+            return subjects.reduce((accumulator, subject) => {
+                const key = (subject.slug || subject.id || '').trim().toLowerCase();
+                if (!key) return accumulator;
+                const chapterItems = Array.isArray(subject.chapterItems) ? subject.chapterItems : [];
+                const chapters = chapterItems.length ? chapterItems.map((chapter) => ({
+                    title: chapter.title || chapter.name || '',
+                    youtubeUrl: chapter.youtubeUrl || buildChapterYoutubeUrl(subject.id, chapter.title || chapter.name || '')
+                })) : (Array.isArray(subject.full) && subject.full.length ? subject.full.map((chapter) => ({
+                    title: typeof chapter === 'string' ? chapter : chapter.title || '',
+                    youtubeUrl: typeof chapter === 'string' ? buildChapterYoutubeUrl(subject.id, chapter) : (chapter.youtubeUrl || '')
+                })) : []);
+                accumulator[key] = {
+                    id: subject.id || key,
+                    slug: subject.slug || key,
+                    title: subject.title || subject.name || 'Untitled Subject',
+                    titleHi: subject.titleHi || subject.nameHi || '',
+                    icon: subject.icon || '',
+                    image: subject.image || '',
+                    chapters,
+                    preview: Array.isArray(subject.preview) ? subject.preview : [],
+                    full: Array.isArray(subject.full) ? subject.full : []
+                };
+                return accumulator;
+            }, {});
+        }
+
+        function loadSubjectData() {
+            return new Promise((resolve) => {
+                try {
+                    const storedSubjects = localStorage.getItem('vidyakosh_subjects');
+                    if (storedSubjects) {
+                        const parsed = JSON.parse(storedSubjects);
+                        const normalized = normalizeStoredSubjectData(parsed);
+                        if (Object.keys(normalized).length) {
+                            resolve(normalized);
+                            return;
+                        }
+                    }
+                } catch (error) {
+                    console.warn('Unable to read stored subject data.', error);
+                }
+                resolve(DEFAULT_SUBJECT_CONTENT);
+            });
+        }
+
+        function renderLoadingState() {
+            document.getElementById('subjectTitle').innerText = 'Loading Subject...';
+            document.getElementById('subjectContainer').innerHTML = `
+                <div class="loading-state">Loading your selected subject chapters...</div>
+            `;
+        }
+
+        function renderSubject(data) {
+            const title = data.title || data.name || 'Subject';
+            const titleHi = data.titleHi || '';
+            const icon = data.icon || '📘';
+            const image = data.image || '';
+            const chapters = Array.isArray(data.chapters) && data.chapters.length ? data.chapters : (Array.isArray(data.full) ? data.full : []);
+            const chapterEntries = chapters.map((chapter) => typeof chapter === 'string' ? { title: chapter, youtubeUrl: '' } : chapter);
+            const summary = data.scope || data.scopeHi || `${chapterEntries.length} Chapters`;
+            const chapterCount = chapterEntries.length || 0;
+
+            document.getElementById('subjectTitle').innerText = title;
+            const container = document.getElementById('subjectContainer');
+
+            if (!chapterCount) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <strong>No chapter data available for this subject yet.</strong><br />Please return to the dashboard and choose another subject.
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="subject-shell">
+                    <section class="subject-banner">
+                        ${image
+                            ? `<div class="subject-banner-media"><img src="${image}" alt="${title}" loading="lazy" /></div>`
+                            : `<div class="subject-icon-large">${icon}</div>`}
+                        <div class="banner-copy">
+                            <div class="eyebrow">Subject</div>
+                            <h1>${title}</h1>
+                            <p class="banner-subtitle">${titleHi ? `${titleHi} • ` : ''}${chapterCount} Chapters · ${summary}</p>
+                        </div>
+                    </section>
+                    <div class="chapter-list">
+                        ${chapterEntries.map((chapter, index) => {
+                            const chapterTitle = typeof chapter === 'string' ? chapter : (chapter.title || '');
+                            const youtubeUrl = typeof chapter === 'string' ? '' : (chapter.youtubeUrl || '');
+                            return `
+                                <div class="chapter-card" data-chapter-youtube="${youtubeUrl}">
+                                    <div class="chapter-main">
+                                        <div class="chapter-badge">${index + 1}</div>
+                                        <div class="chapter-name">${chapterTitle}</div>
+                                    </div>
+                                    <div class="chapter-actions">
+                                        <div class="chapter-resources">
+                                            <a href="#" class="res-btn">📄 Notes</a>
+                                            <a href="#" class="res-btn">🎧 Audio</a>
+                                            <a href="#" class="res-btn">⏱️ Quiz</a>
+                                            <a href="#" class="res-btn">🎯 Imp Q</a>
+                                        </div>
+                                        ${youtubeUrl ? `<button class="live-class-btn" type="button" data-action="live-class"><span class="live-dot"></span>Live Class</button>` : ''}
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+
+            container.querySelectorAll('[data-action="live-class"]').forEach((button) => {
+                button.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    const card = button.closest('.chapter-card');
+                    const url = card?.dataset.chapterYoutube;
+                    if (url) {
+                        window.open(url, '_blank', 'noopener,noreferrer');
+                    }
+                });
+            });
+
+            container.querySelectorAll('.res-btn').forEach((link) => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                });
+            });
+        }
+
+        function renderError(message) {
+            document.getElementById('subjectTitle').innerText = 'Subject Not Found';
+            document.getElementById('subjectContainer').innerHTML = `
+                <div class="empty-state">
+                    <strong>${message}</strong><br />Please go back and choose one of the subject cards from the home page.
+                </div>
+            `;
+        }
+
+        function goHome() {
+            if (document.referrer && document.referrer.includes('index.html')) {
+                history.back();
+            } else {
+                window.location.href = 'index.html';
+            }
+        }
+
+        async function initSubjectPage() {
+            renderLoadingState();
+            try {
+                const key = getSubjectKey();
+                const subjectStore = await loadSubjectData();
+                const data = subjectStore[key];
+
+                if (!key) {
+                    renderError('No subject was selected.');
+                } else if (!data) {
+                    renderError(`Subject key '${key}' is not recognized.`);
+                } else {
+                    renderSubject(data);
+                }
+            } catch (error) {
+                console.error('Subject page error:', error);
+                renderError('An unexpected error occurred while loading this subject.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initSubjectPage);
+    </script>
+</body>
+</html>

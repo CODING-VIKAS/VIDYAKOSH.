@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="description" content="VidyaKosh — Access official Rajasthan Board & NCERT Class 10 syllabus packages with core chapter assets fully offline." />
+  <title>VidyaKosh · Class 10th Board Vault</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-900: #0f172a; --bg-800: #1e293b; --bg-700: #243349;
+      --glass: rgba(30, 41, 59, 0.55); --glass-border: rgba(148, 163, 184, 0.18);
+      --cyan: #06b6d4; --cyan-soft: rgba(6, 182, 212, 0.15); --blue: #3b82f6;
+      --text: #e2e8f0; --text-dim: #94a3b8; --text-faint: #64748b;
+      --radius: 16px; --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { background: var(--bg-900); scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, 'Noto Sans Devanagari', sans-serif;
+      background:
+        radial-gradient(900px 500px at 85% -10%, rgba(6,182,212,0.10), transparent 60%),
+        radial-gradient(700px 500px at 0% 0%, rgba(59,130,246,0.10), transparent 55%),
+        var(--bg-900);
+      color: var(--text); min-height: 100vh; line-height: 1.55; padding-bottom: 64px;
+    }
+    .navbar {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 16px 24px; background: rgba(15,23,42,0.72);
+      backdrop-filter: blur(14px); border-bottom: 1px solid var(--glass-border);
+    }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); }
+    .brand .logo {
+      display: grid; place-items: center; width: 42px; height: 42px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      box-shadow: 0 0 18px rgba(6,182,212,0.5);
+    }
+    .brand .logo svg { width: 24px; height: 24px; }
+    .brand .name { font-size: 22px; font-weight: 800; }
+    .brand .name span { color: var(--cyan); }
+    .nav-links { display: flex; align-items: center; gap: 12px; }
+    .sync-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 11px 20px; border: 1px solid rgba(6,182,212,0.55);
+      border-radius: 12px; background: var(--cyan-soft); color: #e6fbff;
+      font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.25s ease;
+    }
+    .sync-btn:hover { background: rgba(6,182,212,0.28); box-shadow: 0 0 22px rgba(6,182,212,0.4); transform: translateY(-2px); }
+    .sync-btn svg { width: 18px; height: 18px; }
+    .sync-btn.spinning svg { animation: spin 0.9s linear infinite; }
+    
+    /* Fixed Navigation Buttons with Blue/Cyan Glow & Zoom Animation */
+    .pyq-btn {
+      display: inline-flex; 
+      align-items: center; 
+      justify-content: center;
+      padding: 11px 20px; 
+      border-radius: 12px;
+      border: 1px solid rgba(6, 182, 212, 0.45); 
+      background: var(--cyan-soft);
+      color: #e6fbff; 
+      font-size: 15px; 
+      font-weight: 700; 
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 15px rgba(6, 182, 212, 0.15);
+      cursor: pointer;
+    }
+    .pyq-btn:hover {
+      transform: translateY(-3px) scale(1.06);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.35), rgba(59, 130, 246, 0.35));
+      border-color: rgba(6, 182, 212, 0.85);
+      color: #ffffff;
+      box-shadow: 0 0 22px rgba(6, 182, 212, 0.5), 0 8px 20px rgba(59, 130, 246, 0.3);
+    }
+    .pyq-btn:active {
+      transform: translateY(-1px) scale(0.98);
+    }
+    .auth-btn-main {
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: #04222a;
+      border: none;
+    }
+    .auth-btn-main:hover {
+      color: #ffffff;
+    }
+    .feedback-link {
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.28), rgba(59, 130, 246, 0.28));
+      border-color: rgba(6, 182, 212, 0.7);
+    }
+    .feedback-footer-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: #e6fbff;
+      font-size: 13px;
+      font-weight: 700;
+      border: 1px solid rgba(6, 182, 212, 0.45);
+      background: rgba(6, 182, 212, 0.12);
+      transition: all 0.25s ease;
+    }
+    .feedback-footer-link:hover {
+      transform: translateY(-2px);
+      background: rgba(6, 182, 212, 0.22);
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .hero { max-width: 1180px; margin: 0 auto; padding: 56px 24px 28px; text-align: center; animation: fadeUp 0.7s ease both; }
+    .hero .eyebrow {
+      display: inline-block; font-size: 13px; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase; color: var(--cyan);
+      border: 1px solid var(--glass-border); background: var(--glass);
+      padding: 6px 14px; border-radius: 999px; margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 52px); font-weight: 800; line-height: 1.1;
+      background: linear-gradient(120deg, #fff 30%, var(--cyan));
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero p { max-width: 720px; margin: 18px auto 0; font-size: clamp(15px,2vw,18px); color: var(--text-dim); }
+    .grid {
+      max-width: 1180px; margin: 0 auto; padding: 32px 24px 60px;
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
+    }
+    .card {
+      display: flex; flex-direction: column; color: var(--text);
+      background: var(--glass); border: 1px solid var(--glass-border);
+      border-radius: var(--radius); overflow: hidden;
+      backdrop-filter: blur(12px); box-shadow: var(--shadow);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeUp 0.6s ease both; cursor: pointer;
+    }
+    .card:hover {
+      transform: translateY(-5px) scale(1.03); border-color: rgba(6,182,212,0.7);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.5), 0 0 28px rgba(6,182,212,0.25);
+    }
+    .card .banner {
+      position: relative; overflow: hidden;
+      width: 100%; height: 250px;
+      display: flex; align-items: center; justify-content: center;
+      padding-top: 0;
+      box-sizing: border-box;
+      background: rgba(255,255,255,0.04);
+    }
+    .card .banner img {
+      display: block; margin: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      transition: transform 0.4s ease;
+    }
+    .card:hover .banner img { transform: scale(1.02); }
+    .card .info { position: relative; padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .card .heading { display: flex; align-items: center; gap: 12px; }
+    .card .subject-icon {
+      display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px;
+      background: var(--cyan-soft); border: 1px solid rgba(6,182,212,0.35); flex-shrink: 0; font-size: 20px;
+    }
+    .card .heading h3 { font-size: 20px; font-weight: 700; }
+    .pill {
+      align-self: flex-start; display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12.5px; font-weight: 600; padding: 6px 12px; border-radius: 999px; color: #e6fbff;
+      background: linear-gradient(135deg, rgba(6,182,212,0.3), rgba(59,130,246,0.3));
+      border: 1px solid rgba(6,182,212,0.4);
+    }
+    .pill .count { background: var(--cyan); color: #04222a; font-weight: 800; padding: 1px 8px; border-radius: 999px; }
+    .chapters { list-style: none; display: flex; flex-direction: column; gap: 7px; margin-top: 2px; }
+    .chapters li { position: relative; padding-left: 18px; font-size: 14px; color: var(--text-dim); }
+    .chapters li::before {
+      content: ""; position: absolute; left: 0; top: 8px;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--cyan); box-shadow: 0 0 8px rgba(6,182,212,0.8);
+    }
+    .open-cta { margin-top: auto; padding-top: 6px; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--cyan); }
+    .open-cta svg { width: 15px; height: 15px; transition: transform 0.25s ease; }
+    .card:hover .open-cta svg { transform: translateX(4px); }
+    #detailView { display: none; }
+    #detailView.active { display: block; }
+    #homeView.hidden { display: none; }
+    .detail { max-width: 900px; margin: 0 auto; padding: 48px 24px 80px; animation: fadeUp 0.6s ease both; }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 8px; color: var(--text-dim);
+      font-size: 14px; margin-bottom: 28px; transition: color 0.2s ease;
+      cursor: pointer; background: none; border: none;
+    }
+    .back-link:hover { color: var(--cyan); }
+    .back-link svg { width: 16px; height: 16px; }
+    .detail-head {
+      display: flex; align-items: center; gap: 18px; padding: 24px;
+      border-radius: var(--radius); background: var(--glass);
+      border: 1px solid var(--glass-border); margin-bottom: 28px;
+    }
+    .detail-head .subject-icon {
+      display: grid; place-items: center; width: 56px; height: 56px; border-radius: 12px;
+      background: var(--cyan-soft); border: 1px solid rgba(6,182,212,0.35); font-size: 28px; flex-shrink: 0;
+    }
+    .detail-head h1 { font-size: 30px; font-weight: 800; }
+    .detail-head p { color: var(--text-dim); font-size: 14px; margin-top: 4px; }
+    .chapter-list { display: grid; gap: 12px; }
+    .chapter-list .item {
+      display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 12px;
+      background: var(--glass); border: 1px solid var(--glass-border);
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+    .chapter-list .item:hover { border-color: rgba(6,182,212,0.6); transform: translateX(4px); }
+    .chapter-list .num {
+      display: grid; place-items: center; width: 34px; height: 34px; flex-shrink: 0;
+      border-radius: 99px; background: var(--cyan-soft); color: var(--cyan); font-weight: 700; font-size: 14px;
+    }
+    .chapter-list .item span { font-size: 15px; }
+    .status-footer {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 40;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 12px 16px; font-size: 13.5px; font-weight: 500; color: var(--text-dim);
+      background: rgba(15,23,42,0.82); backdrop-filter: blur(12px); border-top: 1px solid var(--glass-border);
+    }
+    .status-footer .dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: #22c55e; box-shadow: 0 0 10px #22c55e; animation: pulse 1.8s ease-in-out infinite;
+    }
+    .status-footer strong { color: var(--text); }
+    .hidden { display: none !important; }
+
+    .rbse-entry-banner {
+      max-width: 1180px; margin: 0 auto; padding: 18px 24px 0;
+    }
+    .rbse-entry-shell {
+      position: relative; overflow: hidden; border-radius: 24px; padding: 24px 26px;
+      background: linear-gradient(135deg, rgba(6,182,212,0.16), rgba(59,130,246,0.16));
+      border: 1px solid rgba(6,182,212,0.24);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.28);
+      display: flex; align-items: center; justify-content: space-between; gap: 18px;
+      animation: floatGlow 5s ease-in-out infinite alternate;
+    }
+    .rbse-entry-shell::before {
+      content: ''; position: absolute; inset: -20% auto auto -10%; width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(103,232,249,0.38), transparent 70%);
+      filter: blur(10px); animation: drift 7s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .rbse-entry-shell::after {
+      content: ''; position: absolute; inset: auto -18% -18% auto; width: 240px; height: 240px;
+      background: radial-gradient(circle, rgba(96,165,250,0.28), transparent 72%);
+      filter: blur(12px); animation: drift 8.5s ease-in-out infinite reverse;
+      pointer-events: none;
+    }
+    .rbse-entry-copy h2 {
+      font-size: clamp(20px, 3vw, 28px); font-weight: 800; margin-bottom: 6px;
+    }
+    .rbse-entry-copy p {
+      color: var(--text-dim); font-size: 15px;
+    }
+    .rbse-entry-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.1); color: #e6fbff;
+      border: 1px solid rgba(6,182,212,0.35); border-radius: 999px;
+      padding: 6px 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; margin-bottom: 10px;
+    }
+    .rbse-entry-cta {
+      position: relative; overflow: hidden; border: none; color: #04222a; font-weight: 800; padding: 12px 18px; border-radius: 999px;
+      background: linear-gradient(135deg, #67e8f9, #60a5fa); box-shadow: 0 10px 24px rgba(6,182,212,0.32);
+      cursor: pointer; transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .rbse-entry-cta::before {
+      content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.34), transparent);
+      transform: translateX(-140%); transition: transform 0.45s ease;
+    }
+    .rbse-entry-cta:hover {
+      transform: translateY(-2px); box-shadow: 0 14px 28px rgba(6,182,212,0.4);
+    }
+    .rbse-entry-cta:hover::before {
+      transform: translateX(140%);
+    }
+
+    .rbse-scroll-progress {
+      position: fixed; top: 0; left: 0; width: 0%; height: 3px; z-index: 140;
+      background: linear-gradient(90deg, #06b6d4, #67e8f9, #60a5fa);
+      box-shadow: 0 0 18px rgba(6,182,212,0.6);
+    }
+    .rbse-back-top {
+      position: fixed; right: 20px; bottom: 132px; z-index: 140; border: none; width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, #06b6d4, #3b82f6); color: white; font-size: 20px; cursor: pointer;
+      box-shadow: 0 10px 24px rgba(6,182,212,0.26); opacity: 0; transform: translateY(12px); pointer-events: none; transition: all 0.25s ease;
+    }
+    .rbse-back-top.visible {
+      opacity: 1; transform: translateY(0); pointer-events: auto;
+    }
+    .rbse-back-top:hover {
+      transform: translateY(-3px) scale(1.05);
+    }
+
+    .rbse-updates-view {
+      max-width: 1220px; margin: 0 auto; padding: 28px 24px 86px;
+    }
+    .rbse-updates-shell {
+      display: flex; flex-direction: column; gap: 18px;
+    }
+    .rbse-page-header {
+      padding: 26px 28px; border-radius: 24px; background: rgba(15,23,42,0.86);
+      border: 1px solid rgba(148,163,184,0.18);
+      box-shadow: 0 14px 36px rgba(0,0,0,0.17);
+    }
+    .rbse-page-header h1 {
+      font-size: clamp(24px, 3.6vw, 34px); font-weight: 800; margin-bottom: 8px;
+    }
+    .rbse-page-header p {
+      color: var(--text-dim); max-width: 760px;
+    }
+    .rbse-page-toolbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    .rbse-control-group {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .rbse-control-btn {
+      border: 1px solid rgba(148,163,184,0.16); background: rgba(15,23,42,0.76); color: var(--text-dim);
+      padding: 8px 12px; border-radius: 999px; font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.25s ease;
+    }
+    .rbse-control-btn:hover {
+      transform: translateY(-2px); border-color: rgba(6,182,212,0.36); color: #e6fbff;
+    }
+    .rbse-control-btn.active {
+      background: rgba(6,182,212,0.16); border-color: rgba(6,182,212,0.38); color: #e6fbff;
+      box-shadow: 0 8px 16px rgba(6,182,212,0.16);
+    }
+    .rbse-search-shell {
+      display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-radius: 16px;
+      background: rgba(15,23,42,0.76); border: 1px solid rgba(148,163,184,0.16);
+    }
+    .rbse-search-shell svg { width: 18px; height: 18px; color: var(--cyan); flex-shrink: 0; }
+    .rbse-search-input {
+      flex: 1; border: none; outline: none; background: transparent; color: var(--text);
+      font-size: 15px;
+    }
+    .rbse-search-input::placeholder { color: var(--text-faint); }
+    .rbse-filter-bar {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .rbse-filter-chip {
+      border: 1px solid rgba(148,163,184,0.16); background: rgba(15,23,42,0.72);
+      color: var(--text-dim); padding: 8px 12px; border-radius: 999px; font-weight: 600; cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .rbse-filter-chip.active {
+      border-color: rgba(6,182,212,0.4); background: rgba(6,182,212,0.16); color: #e6fbff;
+    }
+    .rbse-important-banner {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 20px 22px; border-radius: 20px; background: linear-gradient(135deg, rgba(6,182,212,0.18), rgba(59,130,246,0.16));
+      border: 1px solid rgba(6,182,212,0.24); box-shadow: 0 10px 24px rgba(0,0,0,0.2);
+      position: sticky; top: 78px; z-index: 20;
+    }
+    .rbse-important-banner strong { color: #e6fbff; display: block; margin-bottom: 4px; }
+    .rbse-important-banner p { color: var(--text-dim); }
+    .rbse-badge-pill {
+      display: inline-flex; align-items: center; border-radius: 999px; padding: 8px 12px; font-size: 12px;
+      font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+      background: rgba(15,23,42,0.8); border: 1px solid rgba(6,182,212,0.3); color: var(--cyan);
+      white-space: nowrap;
+    }
+    .rbse-feed-grid {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px;
+    }
+    .rbse-update-card {
+      display: flex; flex-direction: column; gap: 14px; padding: 18px 18px 16px;
+      border-radius: 20px; background: rgba(15,23,42,0.82); border: 1px solid rgba(148,163,184,0.16);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.16); opacity: 0;
+      transform: translateY(24px) scale(0.97); transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, border-color 0.3s ease, opacity 0.45s ease;
+      position: relative; overflow: hidden;
+    }
+    .rbse-update-card::before {
+      content: ''; position: absolute; inset: auto 0 0 0; height: 2px; background: linear-gradient(90deg, transparent, rgba(6,182,212,0.5), transparent);
+      transform: scaleX(0.4); transition: transform 0.3s ease;
+    }
+    .rbse-update-card.is-visible {
+      opacity: 1; transform: translateY(0) scale(var(--rbse-card-scale, 1));
+    }
+    .rbse-update-card:hover {
+      transform: translateY(-8px) scale(calc(var(--rbse-card-scale, 1) + 0.02)); box-shadow: 0 16px 36px rgba(0,0,0,0.24), 0 0 24px rgba(6,182,212,0.16);
+      border-color: rgba(6,182,212,0.36);
+    }
+    .rbse-update-card:hover::before {
+      transform: scaleX(1);
+    }
+    .rbse-card-top {
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;
+    }
+    .rbse-card-badge {
+      display: inline-flex; align-items: center; border-radius: 999px; font-size: 12px; font-weight: 700;
+      padding: 7px 10px; text-transform: uppercase; letter-spacing: 0.05em;
+      color: #e6fbff; border: 1px solid transparent;
+    }
+    .rbse-card-badge.model { background: rgba(6,182,212,0.16); border-color: rgba(6,182,212,0.28); }
+    .rbse-card-badge.date { background: rgba(59,130,246,0.16); border-color: rgba(59,130,246,0.28); }
+    .rbse-card-badge.admit { background: rgba(16,185,129,0.16); border-color: rgba(16,185,129,0.28); }
+    .rbse-card-badge.syllabus { background: rgba(249,115,22,0.16); border-color: rgba(249,115,22,0.28); }
+    .rbse-new-tag {
+      display: inline-flex; align-items: center; gap: 5px; padding: 6px 8px; border-radius: 999px;
+      font-size: 11px; font-weight: 700; color: #fef3c7; background: rgba(251,191,36,0.16); border: 1px solid rgba(251,191,36,0.28);
+      white-space: nowrap;
+    }
+    .rbse-update-card h3 {
+      font-size: 18px; font-weight: 700; line-height: 1.35;
+    }
+    .rbse-card-hindi {
+      display: block; margin-top: 4px; font-size: 13px; color: var(--text-dim); font-weight: 500;
+    }
+    .rbse-update-meta {
+      font-size: 13px; color: var(--cyan); font-weight: 600;
+    }
+    .rbse-update-card p { color: var(--text-dim); font-size: 14px; }
+    .rbse-card-highlight-list {
+      display: flex; flex-direction: column; gap: 8px; padding-left: 0; list-style: none;
+    }
+    .rbse-card-highlight-list li {
+      padding-left: 16px; position: relative; color: var(--text-dim); font-size: 13px;
+    }
+    .rbse-card-highlight-list li::before {
+      content: ''; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--cyan); box-shadow: 0 0 8px rgba(6,182,212,0.8);
+    }
+    .rbse-card-actions {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto;
+    }
+    .rbse-action-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 9px 12px; border-radius: 999px; border: 1px solid rgba(6,182,212,0.3);
+      background: rgba(6,182,212,0.12); color: #e6fbff; text-decoration: none; font-size: 13px;
+      font-weight: 700; cursor: pointer;
+    }
+    .rbse-action-btn.secondary {
+      background: rgba(255,255,255,0.05); border-color: rgba(148,163,184,0.2);
+    }
+    .rbse-tools-card {
+      padding: 20px; border-radius: 20px; background: rgba(15,23,42,0.82); border: 1px solid rgba(148,163,184,0.16);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.14);
+    }
+    .rbse-tools-card h3 { font-size: 20px; margin-bottom: 8px; }
+    .rbse-tools-card p { color: var(--text-dim); margin-bottom: 12px; }
+    .rbse-tools-grid {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;
+    }
+    .rbse-tool-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 14px; border-radius: 14px; text-decoration: none; font-weight: 700;
+      border: 1px solid rgba(6,182,212,0.28); background: rgba(6,182,212,0.12); color: #e6fbff;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .rbse-tool-btn:hover { transform: translateY(-2px); background: rgba(6,182,212,0.2); }
+    .rbse-empty-state {
+      padding: 24px; border-radius: 18px; background: rgba(15,23,42,0.74); border: 1px dashed rgba(148,163,184,0.22);
+      text-align: center; color: var(--text-dim);
+    }
+    .rbse-updates-view.compact-mode .rbse-update-card {
+      padding: 14px 16px 12px; gap: 10px;
+    }
+    .rbse-updates-view.compact-mode .rbse-card-highlight-list {
+      gap: 6px;
+    }
+    .rbse-updates-view.focus-mode .rbse-important-banner {
+      border-color: rgba(103,232,249,0.45);
+      box-shadow: 0 0 24px rgba(6,182,212,0.18);
+    }
+    .rbse-updates-view.glow-off .rbse-update-card,
+    .rbse-updates-view.glow-off .rbse-important-banner,
+    .rbse-updates-view.glow-off .rbse-entry-shell {
+      box-shadow: none;
+    }
+
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes floatGlow { 0% { transform: translateY(0px); } 100% { transform: translateY(-6px); } }
+    @keyframes drift { 0%,100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(18px,-16px,0) scale(1.08); } }
+
+    @media (max-width: 900px) {
+      .rbse-entry-shell, .rbse-important-banner { flex-direction: column; align-items: flex-start; }
+      .rbse-feed-grid, .rbse-tools-grid { grid-template-columns: 1fr; }
+      .rbse-entry-cta { width: 100%; }
+    }
+
+    /* Vidya AI Floating Button & Modal */
+    .vidya-ai-float-btn {
+      position: fixed;
+      bottom: 80px;
+      right: 24px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #06b6d4, #3b82f6);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 14px;
+      border: 1px solid rgba(255,255,255,0.3);
+      box-shadow: 0 10px 25px rgba(6,182,212,0.4);
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .vidya-ai-float-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 14px 30px rgba(6,182,212,0.6);
+    }
+    .vidya-ai-modal {
+      display: none;
+      position: fixed;
+      bottom: 140px;
+      right: 24px;
+      width: 360px;
+      max-width: calc(100vw - 48px);
+      height: 480px;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+      z-index: 101;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .vidya-ai-modal.active { display: flex; }
+    .vidya-ai-header {
+      padding: 14px 18px;
+      background: rgba(30, 41, 59, 0.8);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .vidya-ai-header h4 { margin: 0; font-size: 15px; color: #06b6d4; font-weight: 700; }
+    .vidya-ai-close { background: none; border: none; color: #94a3b8; font-size: 18px; cursor: pointer; }
+    .vidya-ai-body {
+      flex: 1;
+      padding: 14px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 13.5px;
+    }
+    .vidya-msg { padding: 10px 14px; border-radius: 12px; max-width: 85%; line-height: 1.4; }
+    .vidya-msg.bot { background: rgba(36, 51, 73, 0.8); color: #e2e8f0; align-self: flex-start; border: 1px solid rgba(148, 163, 184, 0.15); }
+    .vidya-msg.user { background: #06b6d4; color: #04222a; font-weight: 600; align-self: flex-end; }
+    .vidya-ai-input-area {
+      padding: 12px;
+      border-top: 1px solid rgba(148, 163, 184, 0.18);
+      display: flex;
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.6);
+    }
+    .vidya-ai-input-area input {
+      flex: 1;
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      padding: 8px 12px;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 13px;
+      outline: none;
+    }
+    .vidya-ai-input-area button {
+      background: #06b6d4;
+      border: none;
+      color: #04222a;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    /* Auth Modal Overlay & Form Styling */
+    .auth-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .auth-overlay.active { display: flex; }
+    .auth-card {
+      width: 100%;
+      max-width: 400px;
+      background: var(--bg-800);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+    .auth-card h2 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: var(--cyan);
+    }
+    .auth-card p {
+      color: var(--text-dim);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .auth-field {
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .auth-field label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .auth-field input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--glass-border);
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+    }
+    .auth-field input:focus {
+      border-color: var(--cyan);
+    }
+    .auth-submit-btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: #04222a;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .auth-toggle {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+    .auth-toggle span {
+      color: var(--cyan);
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .auth-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <button class="brand" id="brandBtn" style="background:none;border:none;cursor:pointer;">
+      <span class="logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#04222a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z" /><path d="M6 12v5c3 3 9 3 12 0v-5" />
+        </svg>
+      </span>
+      <span class="name">Vidya<span>Kosh</span></span>
+    </button>
+    <div class="nav-links">
+      <button class="sync-btn" id="syncBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12a9 9 0 0 1-9 9c-2.5 0-4.8-1-6.4-2.7M3 12a9 9 0 0 1 9-9c2.5 0 4.8 1 6.4 2.7" />
+          <path d="M21 3v6h-6M3 21v-6h6" />
+        </svg>
+        <span id="syncLabel">SYNC 10th SYLLABUS</span>
+      </button>
+      <a class="pyq-btn" href="/last.paper.html" target="_blank" rel="noreferrer noopener">PYQ Vault</a>
+      <a class="pyq-btn" href="/school-visits.html">School Visits 🏫</a>
+      <a class="pyq-btn" href="https://www.instagram.com/human.talk2?igsh=ZHptanNvNXRnd3Jm" target="_blank" rel="noopener noreferrer">CONNECT WITH INSTAGRAM</a>
+      <a class="pyq-btn feedback-link" href="/feedback.html">Feedback &amp; Support</a>
+      <button class="pyq-btn auth-btn-main" id="openAuthBtn" type="button">Sign In / Sign Up</button>
+      </div>
+  </nav>
+    <div id="homeView">
+    <header class="hero">
+      <span class="eyebrow">RAJASTHAN BOARD-NCERT-OFFLINE READY</span>
+      <h1>CLASS 10th BOARD VAULT</h1>
+      <p>ACCESS OFFICIAL RAJASTHAN BOARD &amp; NCERT SYLLABUS PACKAGES WITH CORE CHAPTER ASSETS FULLY OFFLINE.</p>
+    </header>
+    <section class="rbse-entry-banner">
+      <div class="rbse-entry-shell">
+        <div class="rbse-entry-copy">
+          <div class="rbse-entry-badge">Live Updates</div>
+          <h2> राजस्थान 10th बोर्ड अपडेट्स</h2>
+          <p>Model Papers, Time Table, Admit Cards &amp; Latest News</p>
+        </div>
+        <button class="rbse-entry-cta" type="button" data-route="rbse-updates">View All Board Updates</button>
+      </div>
+    </section>
+    <main class="grid" id="subjectGrid"></main>
+  </div>
+
+  <div id="detailView">
+    <div class="detail">
+      <button class="back-link" id="backBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M11 6l-6 6 6 6"/>
+        </svg>
+        BACK TO BOARD VAULT
+      </button>
+      <div class="detail-head" id="detailHead"></div>
+      <div class="chapter-list" id="chapterList"></div>
+    </div>
+  </div>
+
+  <div id="rbseUpdatesView" class="rbse-updates-view hidden"></div>
+  <div id="rbseScrollProgress" class="rbse-scroll-progress"></div>
+  <button id="rbseBackTop" class="rbse-back-top hidden" type="button" aria-label="Scroll to top">↑</button>
+
+  <footer class="status-footer">
+    <span class="dot"></span>
+    <span>VidyaKosh Local Database Status: <strong>Class 10 Core Sync Completed</strong></span>
+    <a class="feedback-footer-link" href="feedback.html">Feedback &amp; Support</a>
+  </footer>
+
+  <!-- Sign In / Sign Up Modal -->
+  <div class="auth-overlay" id="authModal">
+    <div class="auth-card">
+      <button class="auth-close-btn" id="closeAuthBtn">&times;</button>
+      
+      <!-- Sign In Form -->
+      <form id="signInForm">
+        <h2>Sign In</h2>
+        <p>Enter your credentials to access your VidyaKosh account</p>
+        <div class="auth-field">
+          <label for="signinEmail">Email Address</label>
+          <input type="email" id="signinEmail" required placeholder="name@example.com" />
+        </div>
+        <div class="auth-field">
+          <label for="signinPassword">Password</label>
+          <input type="password" id="signinPassword" required placeholder="••••••••" />
+        </div>
+        <button type="submit" class="auth-submit-btn">Sign In</button>
+        <div class="auth-toggle">
+          Don't have an account? <span id="switchToSignUp">Sign Up</span>
+        </div>
+      </form>
+
+      <!-- Sign Up Form -->
+      <form id="signUpForm" style="display:none;">
+        <h2>Create Account</h2>
+        <p>Register to sync your study progress offline</p>
+        <div class="auth-field">
+          <label for="signupName">Full Name</label>
+          <input type="text" id="signupName" required placeholder="Your Name" />
+        </div>
+        <div class="auth-field">
+          <label for="signupEmail">Email Address</label>
+          <input type="email" id="signupEmail" required placeholder="name@example.com" />
+        </div>
+        <div class="auth-field">
+          <label for="signupPassword">Password</label>
+          <input type="password" id="signupPassword" required placeholder="••••••••" />
+        </div>
+        <button type="submit" class="auth-submit-btn">Sign Up</button>
+        <div class="auth-toggle">
+          Already have an account? <span id="switchToSignIn">Sign In</span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Vidya AI Floating Button & Modal -->
+  <button class="vidya-ai-float-btn" id="vidyaAiBtn">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+    </svg>
+    <span>VIDYA AI</span>
+  </button>
+
+  <div class="vidya-ai-modal" id="vidyaAiModal">
+    <div class="vidya-ai-header">
+      <h4>✨ Vidya AI Study Assistant</h4>
+      <button class="vidya-ai-close" id="vidyaAiClose">&times;</button>
+    </div>
+    <div class="vidya-ai-body" id="vidyaAiBody">
+      <div class="vidya-msg bot">Namaste! Main Vidya AI hoon. Aap Class 10th syllabus ya kisi bhi subject ke bare me mujhse pooch sakte hain!</div>
+    </div>
+    <div class="vidya-ai-input-area">
+      <input type="text" id="vidyaAiInput" placeholder="Poochiye apna sawal..." />
+      <button id="vidyaAiSend">Send</button>
+    </div>
+  </div>
+
+  <script src="../rbseUpdatesData.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for(let registration of registrations) {
+          registration.unregister().then(function(boolean) {
+            if(boolean) {
+              console.log('Service worker unregistered');
+              window.location.reload();
+            }
+          });
+        }
+      });
+    }
+
+    const SUBJECTS = [
+      {
+        id:'science', slug:'science', title:'SCIENCE', titleHi:'विज्ञान', name:'SCIENCE', nameHi:'विज्ञान', chapters:13, scope:'Chemistry, Biology, Physics', scopeHi:'रसायन विज्ञान, जीव विज्ञान, भौतिक विज्ञान', icon:'🔬', image:'SCIENCE.jpg',
+        preview:['रासायनिक अभिक्रियाएँ एवं समीकरण','अम्ल, क्षारक एवं लवण','धातु एवं अधातु','कार्बन एवं उसके यौगिक','जैव प्रक्रम'],
+        full:['रासायनिक अभिक्रियाएँ एवं समीकरण','अम्ल, क्षारक एवं लवण','धातु एवं अधातु','कार्बन एवं उसके यौगिक','जैव प्रक्रम','नियंत्रण एवं समन्वय','जीव जनन कैसे करते हैं','आनुवंशिकता एवं जैव विकास','प्रकाश–परावर्तन तथा अपवर्तन','मानव नेत्र तथा रंगबिरंगा संसार','विद्यत','विद्युत धारा के चुंबकीय प्रभाव','हमारा पर्यावरण']
+      },
+      {
+        id:'math', slug:'math', title:'MATHEMATICS', titleHi:'गणित', name:'MATHEMATICS', nameHi:'गणित', chapters:14, scope:'Arithmetic, Algebra, Geometry, Trigonometry, Statistics', scopeHi:'अंकगणित, बीजगणित, ज्यामिति, त्रिकोणमिति, सांख्यिकी', icon:'📐', image:'MATHEMATICS.jpg',
+        preview:['वास्तविक संख्याएँ','बहुपद','दो चर वाले रैखिक समीकरण युग्म','द्विघात समीकरण','समांतर श्रेढ़ी'],
+        full:['वास्तविक संख्याएँ','बहुपद','दो चर वाले रैखिक समीकरण युग्म','द्विघात समीकरण','समांतर श्रेढ़ी','त्रिभुज','निर्देशांक ज्यामिति','त्रिकोणमिति का परिचय','त्रिकोणमिति के कुछ अनुप्रयोग','वृत्त','वृत्तों से संबंधित क्षेत्रफल','पृष्ठीय क्षेत्रफल एवं आयतन','सांख्यिकी','प्रायिकता']
+      },
+      {
+        id:'social', slug:'social', title:'SOCIAL SCIENCE', titleHi:'सामाजिक विज्ञान', name:'SOCIAL SCIENCE', nameHi:'सामाजिक विज्ञान', chapters:21, scope:'History, Political Science, Geography, Economics', scopeHi:'इतिहास, राजनीति विज्ञान, भूगोल, अर्थशास्त्र', icon:'🌍', image:'SOCIAL SCIENCE.jpg',
+        preview:['यूरोप में राष्ट्रवाद का उदय','भारत में राष्ट्रवाद','संसाधन एवं विकास','सत्ता की साझेदारी','भारतीय अर्थव्यवस्था के क्षेत्रक'],
+        full:['यूरोप में राष्ट्रवाद का उदय','भारत में राष्ट्रवाद','भूमंडलीकृत विश्व का बनना','औद्योगीकरण का युग','मुद्रण संस्कृति और आधुनिक विश्व','संसाधन एवं विकास','वन एवं वन्य जीव संसाधन','जल संसाधन','कृषि','खनिज तथा ऊर्जा संसाधन','राष्ट्रीय अर्थव्यवस्था की जीवन रेखाएँ','सत्ता की साझेदारी','संघवाद','जाति, धर्म और लैंगिक मसले','राजनीतिक दल','लोकतंत्र के परिणाम','विकास','भारतीय अर्थव्यवस्था के क्षेत्रक','मुद्रा एवं साख', 'वैश्वीकरण और भारतीय अर्थव्यवस्था','उपभोक्ता अधिकार']
+      },
+      {
+        id:'english', slug:'english', title:'ENGLISH', titleHi:'अंग्रेज़ी', name:'ENGLISH', nameHi:'अंग्रेज़ी', chapters:18, scope:'First Flight & Footprints Without Feet', scopeHi:'फर्स्ट फ्लाइट एवं फुटप्रिंट्स विदाउट फीट', icon:'📖', image:'English.jpg',
+        preview:['A Letter to God','Nelson Mandela: Long Walk to Freedom','Two Stories about Flying','From the Diary of Anne Frank','Mijbil the Otter','Madam Rides the Bus'],
+        full:['A Letter to God','Nelson Mandela: Long Walk to Freedom','Two Stories about Flying','From the Diary of Anne Frank','Glimpses of India','Mijbil the Otter','Madam Rides the Bus','The Sermon at Benares','The Proposal','A Triumph of Surgery (Footprints)','The Thief\'s Story (Footprints)','The Midnight Visitor (Footprints)','A Question of Trust (Footprints)','Footprints without Feet','The Making of a Scientist','The Necklace','Bholi','The Book That Saved the Earth']
+      },
+      {
+        id:'english_grammar', slug:'english_grammar', title:'English Grammar', titleHi:'English Grammar', name:'English Grammar (व्याकरण) — मुख्य टॉपिक्स', nameHi:'English_grammar', chapters:3, scope:'Tenses, Writing, Reading', scopeHi:'काल, लेखन, पठन', icon:'📖', image:'English Grammar.jpg',
+        preview:['इसमें क्रिया का सही रूप भरना होता है (Correct Forms of Verbs)।','सीधे कहे गए वाक्यों (Direct) को अप्रत्यक्ष वाक्य (Indirect) में बदलना।','Informal Letters: माता-पिता, मित्रों या रिश्तेदारों को लिखे जाने वाले पत्र।','E-mail Writing: प्रिंसिपल या किसी संस्था को फॉर्मल ईमेल भेजना।'],
+        full:['इसमें क्रिया का सही रूप भरना होता है (Correct Forms of Verbs)।','Present, Past और Future टेंस के सभी प्रकारों के नियम।','सीधे कहे गए वाक्यों (Direct) को अप्रत्यक्ष वाक्य (Indirect) में बदलना।','Assertive, Interrogative, और Imperative सेंटेंस के नियम।','Active Voice से Passive Voice में बदलना।','दो वाक्यों को जोड़ने वाले शब्द, जैसे: and, as well as, not only... but also, either... or, neither... nor, so... that, too... to, although, yet आदि','वाक्यों को जोड़ने के लिए सर्वनाम का प्रयोग, जैसे: who, whom, whose, which, that।','सब्जेक्ट के अनुसार सही क्रिया (Verb) का चुनाव करना (एकवचन/बहुवचन नियम)।','प्रश्नों का निर्माण करना (W-H words से) और वाक्यों के अंत में छोटे प्रश्न (Tag Questions) जोड़ना (जैसे: isn t it? don t they?)।','Informal Letters: माता-पिता, मित्रों या रिश्तेदारों को लिखे जाने वाले पत्र।','Formal Letters: स्कूल के प्रिंसिपल (Application), एडिटर (Editor) या सरकारी अधिकारियों को लिखे जाने वाले पत्र।','E-mail Writing: प्रिंसिपल या किसी संस्था को फॉर्मल ईमेल भेजना।','दिए गए आउटलाइन्स (हिंट्स/पॉइंट्स) के आधार पर लगभग 80 शब्दों में एक छोटी कहानी लिखना और उसका शीर्षक (Title) व नैतिक शिक्षा (Moral) देना।','Short Paragraph Writing (अनुच्छेद लेखन):','Reading Section (अपठित गद्यांश): इसमें Unseen Passages (दो अपठित गद्यांश) आते हैं, जिन्हें पढ़कर नीचे दिए गए प्रश्नों के उत्तर देने होते हैं। इनमें शब्दार्थ (Vocabulary) और विपरीत शब्द (Opposites) भी पूछे जाते हैं।']
+      },
+      {
+        id:'hindi', slug:'hindi', title:'HINDI', titleHi:'हिंदी', name:'HINDI', nameHi:'हिंदी', chapters:17, scope:'क्षितिज एवं कृतिका भाग-2', scopeHi:'क्षितिज एवं कृतिका भाग-2', icon:'✍️', image:'hindi.jpg', 
+        preview:['सूरदास के पद','राम-लक्ष्मण-परशुराम संवाद','आत्मकथ्य (जयशंकर प्रसाद)','राम-लक्ष्मण-परशुराम संवाद','साना-साना हाथ जोड़ि','लखनवी अंदाज़ (यशपाल)'],
+        full:['सूरदास के पद','राम-लक्ष्मण-परशुराम संवाद','आत्मकथ्य (जयशंकर प्रसाद)','उत्साह और अट नहीं रही है (सूर्यकांत त्रिपाठी निराला)','यह दंतुरित मुस्कान और फसल (नागार्जुन)','संगतकार (मंगलेश डबराल)','नेताजी का चश्मा (स्वयं प्रकाश)','बालगोबिन भगत (रामवृक्ष बेनीपुरी)','लखनवी अंदाज़ (यशपाल)','एक कहानी यह भी (मन्नू भंडारी)','नौबतखाने में इबादत (यतीन्द्र मिश्र)','संस्कृति (भदंत आनंद कौसल्यायन)','माता का अँचल (शिवपूजन सहाय)','साना-साना हाथ जोड़ि... (मधु कांकरिया)','मैं क्यों लिखता हूँ? (अज्ञेय)','व्याकरण: पदबंध, रचना के आधार पर वाक्य रूपांतरण, समास, मुहावरे।','लेखन: अनुच्छेद लेखन (Paragraph), पत्र लेखन (Formal/Informal Letter), विज्ञापन लेखन (Advertisement), संदेश लेखन (Message Writing) या ईमेल लेखन।']
+      },
+      {
+        id:'sanskrit', slug:'sanskrit', title:'SANSKRIT', titleHi:'संस्कृतम्', name:'SANSKRIT', nameHi:'संस्कृतम्', chapters:12, scope:'Shloka-based Sanskrit study', scopeHi:'श्लोक-आधारित संस्कृत अध्ययन', icon:'📜', image:'SANSKRIT.jpg',
+        preview:['शुचिपर्यावरणम्','बुद्धिर्बलवती सदा','जननी तुल्यवत्सला','सुभाषितानि','सौहार्दं प्रकृतेः शोभा'],
+        full:['शुचिपर्यावरणम्','बुद्धिर्बलवती सदा','शिशुलालनम्','जननी तुल्यवत्सला','सुभाषितानि','सौहार्दं प्रकृतेः शोभा','विचित्रः साक्षी','सूक्तयः','भूकम्पविभीषिका','अन्योक्तयः','संधि(व्यंजन और विसर्ग संधि)','समास (अव्ययीभाव, कर्मधारय, द्विगु, बहुव्रीहि, द्वंद्व)','प्रत्यय (कृदन्त और तद्धित)','अव्यय पद','वाच्य परिवर्तन','समय लेखनम् (घड़ी देखकर समय संस्कृत में लिखना)','अशुद्धि संशोधनम् (वाक्यों को शुद्ध करना)']
+      }
+    ];
+
+    const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+    function persistSubjects() {
+      try {
+        localStorage.setItem('vidyakosh_subjects', JSON.stringify(SUBJECTS));
+      } catch (error) {
+        console.warn('Unable to persist subject data.', error);
+      }
+    }
+
+    function resolveImagePath(img) {
+      if (!img) return img;
+      if (/^[a-zA-Z]:[\\\\/]/.test(img)) {
+        return '../' + img.split(/[\\\\/]/).pop();
+      }
+      if (/^(https?:|data:|\/)/i.test(img)) return img;
+      return '../' + img;
+    }
+
+    function renderGrid() {
+      const grid = document.getElementById('subjectGrid');
+      grid.innerHTML = SUBJECTS.map((s, i) => {
+        const imgSrc = resolveImagePath(s.image);
+        return `
+        <div class="card" data-subject-id="${s.id}" style="animation-delay:${i * 0.08}s">
+          <div class="banner">
+            <img src="${imgSrc}" alt="${s.name}" loading="lazy" />
+          </div>
+          <div class="info">
+            <div class="heading">
+              <span class="subject-icon">${s.icon}</span>
+              <h3>${s.name} <small style="font-weight:400;font-size:15px;color:var(--text-dim)">(${s.nameHi})</small></h3>
+            </div>
+            <span class="pill"><span class="count">${s.chapters}</span> Chapters · ${s.scope}</span>
+            <ul class="chapters">${s.preview.map(c => `<li>${c}</li>`).join('')}</ul>
+            <div class="open-cta">Open Subject Page ${ARROW}</div>
+          </div>
+        </div>
+      `
+      }).join('');
+
+      grid.addEventListener('click', (event) => {
+        const card = event.target.closest('.card');
+        if (!card) return;
+        if (card.dataset.route === 'rbse-updates') {
+          showRbseUpdates();
+          return;
+        }
+        const subjectId = card.dataset.subjectId;
+        if (subjectId) {
+          window.location.href = '../subject.html?sub=' + encodeURIComponent(subjectId);
+        }
+      });
+    }
+
+    const rbseUpdatesView = document.getElementById('rbseUpdatesView');
+    const rbseScrollProgress = document.getElementById('rbseScrollProgress');
+    const rbseBackTopBtn = document.getElementById('rbseBackTop');
+    const rbseState = { filter: 'All', search: '', zoom: 1, layout: 'comfort', glow: true };
+
+    function escapeHtml(value) {
+     return String(value ?? '')
+       .replace(/&/g, '&amp;')
+       .replace(/</g, '&lt;')
+       .replace(/>/g, '&gt;')
+       .replace(/"/g, '&quot;')
+       .replace(/'/g, '&#39;');
+    }
+
+    function formatRbseDate(dateString) {
+     const date = new Date(dateString + 'T00:00:00');
+     return new Intl.DateTimeFormat('en-IN', { month: 'long', day: 'numeric', year: 'numeric' }).format(date);
+    }
+
+    function getFilteredRbseUpdates() {
+     return RBSE_UPDATES_DATA.filter((item) => {
+       const matchesFilter = rbseState.filter === 'All' || item.category === rbseState.filter;
+       const haystack = `${item.title} ${item.titleHi} ${item.summary} ${item.category}`.toLowerCase();
+       const matchesSearch = haystack.includes(rbseState.search.toLowerCase());
+       return matchesFilter && matchesSearch;
+     });
+    }
+
+    function shareRbseNotice(title, link) {
+     const shareText = `RBSE Class 10 update: ${title}\nOfficial link: ${link}`;
+     if (navigator.share) {
+       navigator.share({ title: 'RBSE Board Update', text: shareText }).catch(() => {});
+     } else if (navigator.clipboard && navigator.clipboard.writeText) {
+       navigator.clipboard.writeText(shareText).then(() => {
+         alert('Notice details copied to clipboard.');
+       });
+     } else {
+       window.prompt('Copy this notice:', shareText);
+     }
+    }
+
+    function applyRbseVisualState() {
+     rbseUpdatesView.classList.toggle('compact-mode', rbseState.layout === 'compact');
+     rbseUpdatesView.classList.toggle('focus-mode', rbseState.layout === 'focus');
+     rbseUpdatesView.classList.toggle('glow-off', !rbseState.glow);
+     rbseUpdatesView.style.setProperty('--rbse-card-scale', rbseState.zoom.toFixed(2));
+    }
+
+    function setRbseZoom(delta) {
+     rbseState.zoom = Math.max(0.9, Math.min(1.2, Number((rbseState.zoom + delta).toFixed(2))));
+     renderRbseUpdatesPage();
+    }
+
+    function setRbseLayout(layout) {
+     rbseState.layout = layout;
+     renderRbseUpdatesPage();
+    }
+
+    function toggleRbseGlow() {
+     rbseState.glow = !rbseState.glow;
+     renderRbseUpdatesPage();
+    }
+
+    function updateRbseScrollState() {
+     const scrollTop = window.scrollY || window.pageYOffset;
+     const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+     const progress = (scrollTop / maxScroll) * 100;
+     if (rbseScrollProgress) {
+       rbseScrollProgress.style.width = `${Math.min(progress, 100)}%`;
+     }
+     if (rbseBackTopBtn) {
+       rbseBackTopBtn.classList.toggle('visible', scrollTop > 420);
+     }
+    }
+
+    function revealRbseCards() {
+     const cards = rbseUpdatesView.querySelectorAll('.rbse-update-card');
+     cards.forEach((card, index) => {
+       card.style.transitionDelay = `${index * 70}ms`;
+       requestAnimationFrame(() => card.classList.add('is-visible'));
+     });
+    }
+
+    function renderRbseUpdatesPage() {
+     const filteredUpdates = getFilteredRbseUpdates();
+     const categories = ['All', ...new Set(RBSE_UPDATES_DATA.map(item => item.category))];
+     const priorityUpdate = filteredUpdates.find(item => item.isPriority) || filteredUpdates[0] || RBSE_UPDATES_DATA[0];
+     const cardScale = rbseState.zoom.toFixed(2);
+
+     applyRbseVisualState();
+     rbseUpdatesView.innerHTML = `
+       <div class="rbse-updates-shell">
+         <section class="rbse-page-header">
+           <h1>राजस्थान बोर्ड (RBSE) Class 10th Updates &amp; Announcements</h1>
+           <p>Exam dates, admit cards, model papers, syllabus changes, and official notifications in one place.</p>
+         </section>
+         <section class="rbse-page-toolbar">
+           <div class="rbse-control-group">
+             <button class="rbse-control-btn rbse-zoom-out" type="button">− Zoom</button>
+             <button class="rbse-control-btn rbse-zoom-reset" type="button">Reset</button>
+             <button class="rbse-control-btn rbse-zoom-in" type="button">+ Zoom</button>
+           </div>
+           <div class="rbse-control-group">
+             <button class="rbse-control-btn${rbseState.layout === 'compact' ? ' active' : ''}" type="button" data-layout="compact">Compact</button>
+             <button class="rbse-control-btn${rbseState.layout === 'comfort' ? ' active' : ''}" type="button" data-layout="comfort">Comfort</button>
+             <button class="rbse-control-btn${rbseState.layout === 'focus' ? ' active' : ''}" type="button" data-layout="focus">Focus</button>
+             <button class="rbse-control-btn${rbseState.glow ? ' active' : ''} rbse-glow-toggle" type="button">✨ Glow ${rbseState.glow ? 'On' : 'Off'}</button>
+             <button class="rbse-control-btn rbse-back-home" type="button">← Back to Hub</button>
+           </div>
+         </section>
+         <div class="rbse-search-shell">
+           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
+           <input class="rbse-search-input" type="search" value="${escapeHtml(rbseState.search)}" placeholder="Search announcements, subject or category" />
+         </div>
+         <div class="rbse-filter-bar">
+           ${categories.map((category) => `<button class="rbse-filter-chip${rbseState.filter === category ? ' active' : ''}" type="button" data-category="${category}">${escapeHtml(category)}</button>`).join('')}
+         </div>
+         <section class="rbse-important-banner">
+           <div>
+             <span class="rbse-badge-pill">Top Alert</span>
+             <strong>${escapeHtml(priorityUpdate.title)}</strong>
+             <p>${escapeHtml(priorityUpdate.summary)}</p>
+           </div>
+           <a class="rbse-action-btn" href="${escapeHtml(priorityUpdate.officialLink)}" target="_blank" rel="noreferrer noopener">View Official Notice</a>
+         </section>
+         ${filteredUpdates.length ? `
+           <section class="rbse-feed-grid">
+             ${filteredUpdates.map((item) => `
+               <article class="rbse-update-card" style="--rbse-card-scale:${cardScale}">
+                 <div class="rbse-card-top">
+                   <span class="rbse-card-badge ${item.category === 'Model Papers' ? 'model' : item.category === 'Exam Dates & Schedule' ? 'date' : item.category === 'Results & Admit Card' ? 'admit' : 'syllabus'}">${escapeHtml(item.categoryTag)}</span>
+                   ${item.isNew ? '<span class="rbse-new-tag">● New</span>' : ''}
+                 </div>
+                 <h3>${escapeHtml(item.title)}<span class="rbse-card-hindi">${escapeHtml(item.titleHi)}</span></h3>
+                 <div class="rbse-update-meta">${escapeHtml(formatRbseDate(item.date))} · ${escapeHtml(item.category)}</div>
+                 <p>${escapeHtml(item.summary)}</p>
+                 <ul class="rbse-card-highlight-list">
+                   ${item.highlights.map((highlight) => `<li>${escapeHtml(highlight)}</li>`).join('')}
+                 </ul>
+                 <div class="rbse-card-actions">
+                   <a class="rbse-action-btn" href="${escapeHtml(item.pdfUrl || item.officialLink)}" target="_blank" rel="noreferrer noopener">📄 Download PDF</a>
+                   <a class="rbse-action-btn secondary" href="${escapeHtml(item.officialLink)}" target="_blank" rel="noreferrer noopener">🔗 View Notice</a>
+                   <button class="rbse-action-btn secondary rbse-share-btn" type="button" data-title="${escapeHtml(item.title)}" data-link="${escapeHtml(item.officialLink)}">📤 Share Notice</button>
+                 </div>
+               </article>
+             `).join('')}
+           </section>
+         ` : '<div class="rbse-empty-state">No announcements match your current search. Try another keyword or filter.</div>'}
+         <section class="rbse-tools-card">
+           <h3>Helpful Quick Tools</h3>
+           <p>Jump straight to the official RBSE website or download model papers.</p>
+           <div class="rbse-tools-grid">
+             <a class="rbse-tool-btn" href="https://rajeduboard.rajasthan.gov.in" target="_blank" rel="noreferrer noopener">🌐 RBSE Official Website</a>
+             <a class="rbse-tool-btn" href="https://ncert.nic.in/" target="_blank" rel="noreferrer noopener">📘 NCERT Resources</a>
+           </div>
+         </section>
+       </div>
+     `;
+
+     const searchInput = rbseUpdatesView.querySelector('.rbse-search-input');
+     const filterBar = rbseUpdatesView.querySelector('.rbse-filter-bar');
+     const toolbar = rbseUpdatesView.querySelector('.rbse-page-toolbar');
+     if (searchInput) {
+       searchInput.addEventListener('input', (event) => {
+         rbseState.search = event.target.value;
+         renderRbseUpdatesPage();
+       });
+     }
+     if (filterBar) {
+       filterBar.addEventListener('click', (event) => {
+         const button = event.target.closest('.rbse-filter-chip');
+         if (!button) return;
+         rbseState.filter = button.dataset.category;
+         renderRbseUpdatesPage();
+       });
+     }
+     if (toolbar) {
+       toolbar.addEventListener('click', (event) => {
+         const button = event.target.closest('button');
+         if (!button) return;
+         if (button.classList.contains('rbse-zoom-in')) {
+           setRbseZoom(0.04);
+         } else if (button.classList.contains('rbse-zoom-out')) {
+           setRbseZoom(-0.04);
+         } else if (button.classList.contains('rbse-zoom-reset')) {
+           rbseState.zoom = 1;
+           renderRbseUpdatesPage();
+         } else if (button.classList.contains('rbse-glow-toggle')) {
+           toggleRbseGlow();
+         } else if (button.classList.contains('rbse-back-home')) {
+           showHome();
+         } else if (button.dataset.layout) {
+           setRbseLayout(button.dataset.layout);
+         }
+       });
+     }
+     rbseUpdatesView.querySelectorAll('.rbse-share-btn').forEach((button) => {
+       button.addEventListener('click', () => {
+         shareRbseNotice(button.dataset.title, button.dataset.link);
+       });
+     });
+     revealRbseCards();
+    }
+
+    function showHome() {
+     document.getElementById('detailView').classList.remove('active');
+     document.getElementById('homeView').classList.remove('hidden');
+     document.getElementById('rbseUpdatesView').classList.add('hidden');
+     rbseBackTopBtn.classList.remove('visible');
+     window.scrollTo({ top: 0, behavior: 'smooth' });
+     if (window.location.hash) {
+       history.replaceState(null, '', window.location.pathname + window.location.search);
+     }
+    }
+
+    function showRbseUpdates() {
+     document.getElementById('homeView').classList.add('hidden');
+     document.getElementById('detailView').classList.remove('active');
+     document.getElementById('rbseUpdatesView').classList.remove('hidden');
+     renderRbseUpdatesPage();
+     window.scrollTo({ top: 0, behavior: 'smooth' });
+     history.replaceState(null, '', window.location.pathname + window.location.search + '#rbse-10th-updates');
+    }
+
+    function syncRoute() {
+     if (window.location.hash === '#rbse-10th-updates') {
+       showRbseUpdates();
+     } else {
+       showHome();
+     }
+    }
+
+    document.getElementById('backBtn').addEventListener('click', showHome);
+    document.getElementById('brandBtn').addEventListener('click', showHome);
+    document.querySelectorAll('[data-route="rbse-updates"]').forEach((button) => {
+     button.addEventListener('click', showRbseUpdates);
+    });
+    window.addEventListener('hashchange', syncRoute);
+    window.addEventListener('scroll', updateRbseScrollState, { passive: true });
+    rbseBackTopBtn.addEventListener('click', () => {
+     window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    const syncBtn = document.getElementById('syncBtn');
+    const syncLabel = document.getElementById('syncLabel');
+    syncBtn.addEventListener('click', () => {
+      syncBtn.classList.add('spinning'); syncBtn.disabled = true;
+      syncLabel.textContent = ' Syncing...';
+      setTimeout(() => {
+        syncBtn.classList.remove('spinning'); syncBtn.disabled = false;
+        syncLabel.textContent = 'Sync 10th Syllabus';
+      }, 1800);
+    });
+
+    persistSubjects();
+    renderGrid();
+    syncRoute();
+
+    // Sign In / Sign Up Modal UI Handlers
+    const authModal = document.getElementById('authModal');
+    const openAuthBtn = document.getElementById('openAuthBtn');
+    const closeAuthBtn = document.getElementById('closeAuthBtn');
+    const signInForm = document.getElementById('signInForm');
+    const signUpForm = document.getElementById('signUpForm');
+    const switchToSignUp = document.getElementById('switchToSignUp');
+    const switchToSignIn = document.getElementById('switchToSignIn');
+
+    if(openAuthBtn && authModal && closeAuthBtn) {
+      openAuthBtn.addEventListener('click', () => authModal.classList.add('active'));
+      closeAuthBtn.addEventListener('click', () => authModal.classList.remove('active'));
+      
+      switchToSignUp.addEventListener('click', () => {
+        signInForm.style.display = 'none';
+        signUpForm.style.display = 'block';
+      });
+
+      switchToSignIn.addEventListener('click', () => {
+        signUpForm.style.display = 'none';
+        signInForm.style.display = 'block';
+      });
+    }
+
+    // Vidya AI Logic
+    const aiBtn = document.getElementById('vidyaAiBtn');
+    const aiModal = document.getElementById('vidyaAiModal');
+    const aiClose = document.getElementById('vidyaAiClose');
+    const aiSend = document.getElementById('vidyaAiSend');
+    const aiInput = document.getElementById('vidyaAiInput');
+    const aiBody = document.getElementById('vidyaAiBody');
+
+    // Speech Synthesis Engine
+    function speakText(text, btnElement) {
+      if (!('speechSynthesis' in window)) {
+        alert("Speech Synthesis support is missing in this browser.");
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      const cleanText = text.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '')
+                            .replace(/\*/g, '');
+
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.rate = 0.95;
+      utterance.pitch = 1.15;
+      utterance.lang = 'hi-IN';
+
+      let voices = window.speechSynthesis.getVoices();
+
+      const setFemaleVoice = () => {
+        voices = window.speechSynthesis.getVoices();
+        const preferredFemaleVoice = voices.find(v => {
+          const name = v.name.toLowerCase();
+          const lang = v.lang.toLowerCase();
+          return (lang.includes('hi') || lang.includes('en-in')) && (
+            name.includes('google') ||
+            name.includes('female') ||
+            name.includes('swara') ||
+            name.includes('kalpana') ||
+            name.includes('zira') ||
+            name.includes('natural')
+          );
+        });
+
+        const hindiVoice = voices.find(v => v.lang.toLowerCase().includes('hi'));
+        const fallbackVoice = preferredFemaleVoice || hindiVoice || voices[0];
+
+        if (fallbackVoice) {
+          utterance.voice = fallbackVoice;
+        }
+      };
+
+      setFemaleVoice();
+      if (voices.length === 0) {
+        window.speechSynthesis.onvoiceschanged = setFemaleVoice;
+      }
+      setTimeout(setFemaleVoice, 500);
+
+      if (btnElement) btnElement.innerText = "🔊 Suniye...";
+
+      utterance.onend = () => { 
+        if (btnElement) btnElement.innerText = "🔊 Listen"; 
+      };
+
+      utterance.onerror = () => {
+        if (btnElement) btnElement.innerText = "🔊 Listen";
+      };
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // Teacher Response Engine
+    function getTeacherResponse(userQuery) {
+      const query = userQuery.toLowerCase().trim();
+      const allData = (typeof SUBJECTS !== 'undefined') ? SUBJECTS : [];
+      
+      const matchedSubject = allData.find(s => 
+        query.includes(s.id.toLowerCase()) || 
+        query.includes(s.title.toLowerCase()) || 
+        query.includes(s.name.toLowerCase()) ||
+        (s.titleHi && query.includes(s.titleHi.toLowerCase()))
+      );
+
+      if (matchedSubject) {
+        const chaptersList = matchedSubject.full ? matchedSubject.full.join(", ") : matchedSubject.preview.join(", ");
+        return `Haan bilkul! **${matchedSubject.name} (${matchedSubject.nameHi || ''})** ke baare me bataata hoon. Is subject me kul **${matchedSubject.chapters} chapters** hain aur iska scope **${matchedSubject.scope}** hai.\n\nMukhya Chapters/Topics ye hain:\n👉 ${chaptersList}.\n\nAapko isme se kis specific chapter ke notes ya detail samajhni hai? Main ek-ek karke easy tarike se samjha dunga!`;
+      }
+
+      let foundChapterMatch = null;
+      let belongingSubject = null;
+
+      allData.forEach(s => {
+        const list = s.full || s.preview || [];
+        list.forEach(ch => {
+          if (query.includes(ch.toLowerCase()) || ch.toLowerCase().includes(query)) {
+            foundChapterMatch = ch;
+            belongingSubject = s.name;
+          }
+        });
+      });
+
+      if (foundChapterMatch && belongingSubject) {
+        return `Wah, bhot achha topic choose kiya! **"${foundChapterMatch}"** ye chapter aapke **${belongingSubject}** syllabus ka hissa hai. \n\nSyllabus ke hisaab se is chapter par Board exams me short aur long dono type ke questions aate hain. Chalo isko aasan bhasha me samajhte hain. Kya main aapko iske key points aur important questions samjhaoon?`;
+      }
+
+      if (query.includes('board') || query.includes('exam') || query.includes('pyq') || query.includes('tayari')) {
+        return `Tension bilkul mat lo, beta! Class 10th Board Exams me topper banne ka sabse bada secret hai: **NCERT ke Concept samajhna + Regular Revision**. Hamari website par Science, Math, Social Science, Hindi, English, Sanskrit ke saare syllabus aur PYQ Vault available hain. Aap sabse pehle kaun sa subject revision karna chahte ho?`;
+      }
+
+      return `Shabash! Aapka sawal "${userQuery}" maine samajh liya hai. Ek teacher hone ke naate main aapko bolunga ki is topic ko hum step-by-step samjhenge taaki exam me koi confusion na rahe.\n\nAap website ke Subject section (Science, Math, Social Science, English, Grammar, Hindi, Sanskrit) me se bhi koi specific topic choose kar sakte ho!`;
+    }
+
+    if (aiBtn && aiModal && aiClose) {
+      aiBtn.addEventListener('click', () => aiModal.classList.toggle('active'));
+      aiClose.addEventListener('click', () => {
+        aiModal.classList.remove('active');
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      });
+
+      const handleSend = () => {
+        const text = aiInput.value.trim();
+        if (!text) return;
+
+        const userDiv = document.createElement('div');
+        userDiv.className = 'vidya-msg user';
+        userDiv.textContent = text;
+        aiBody.appendChild(userDiv);
+        aiInput.value = '';
+        aiBody.scrollTop = aiBody.scrollHeight;
+
+        setTimeout(() => {
+          const botDiv = document.createElement('div');
+          botDiv.className = 'vidya-msg bot';
+          
+          const reply = getTeacherResponse(text);
+
+          const msgText = document.createElement('div');
+          msgText.style.whiteSpace = 'pre-line';
+          msgText.innerHTML = reply.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+          botDiv.appendChild(msgText);
+
+          const listenBtn = document.createElement('button');
+          listenBtn.style.cssText = "margin-top:8px; background:rgba(6,182,212,0.2); border:1px solid #06b6d4; color:#06b6d4; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:11.5px; display:inline-flex; align-items:center; gap:4px;";
+          listenBtn.innerHTML = "🔊 Listen";
+          listenBtn.onclick = () => speakText(reply.replace(/\*\*(.*?)\*\*/g, '$1'), listenBtn);
+          botDiv.appendChild(listenBtn);
+
+          aiBody.appendChild(botDiv);
+          aiBody.scrollTop = aiBody.scrollHeight;
+        }, 500);
+      };
+
+      aiSend.addEventListener('click', handleSend);
+      aiInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSend(); });
+    }
+  </script>
+</body>
+</html>
